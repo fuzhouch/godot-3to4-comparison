@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://dyokimintqnj"]
+
+[ext_resource type="Script" path="res://demo_animation_sprite_2d_non_loop_bad.gd" id="1_vlh54"]
+[ext_resource type="Texture2D" uid="uid://274e4g4d5w0v" path="res://item-gold-48x48-192x192-0002.png" id="2_6wvnx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onthy"]
+atlas = ExtResource("2_6wvnx")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8a660"]
+atlas = ExtResource("2_6wvnx")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0hkn"]
+atlas = ExtResource("2_6wvnx")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxcru"]
+atlas = ExtResource("2_6wvnx")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wtus"]
+atlas = ExtResource("2_6wvnx")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ucit1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onthy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8a660")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0hkn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxcru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wtus")
+}],
+"loop": false,
+"name": &"collected",
+"speed": 15.0
+}]
+
+[node name="Demo_AnimationSprite2D_NonLoop_Bad" type="Node2D"]
+position = Vector2(128, 128)
+script = ExtResource("1_vlh54")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ucit1")
+animation = &"collected"

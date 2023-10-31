@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://cpgjkwf82spqq"]
+
+[ext_resource type="Script" path="res://demo_animation_sprite_2d_play_animation_good.gd" id="1_3t1ua"]
+[ext_resource type="Texture2D" uid="uid://274e4g4d5w0v" path="res://item-gold-48x48-192x192-0002.png" id="1_ipk15"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6ud6"]
+atlas = ExtResource("1_ipk15")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmcy7"]
+atlas = ExtResource("1_ipk15")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbl4j"]
+atlas = ExtResource("1_ipk15")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dnr4"]
+atlas = ExtResource("1_ipk15")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atpb2"]
+atlas = ExtResource("1_ipk15")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ym0cx"]
+atlas = ExtResource("1_ipk15")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2pmo4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6ud6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmcy7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xbl4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dnr4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atpb2")
+}],
+"loop": false,
+"name": &"collected",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ym0cx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Demo_AnimationSprite2D_Play_Animation_Good" type="Node2D"]
+position = Vector2(128, 128)
+script = ExtResource("1_3t1ua")
+
+[node name="SelfDestroyTimer" type="Timer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2pmo4")
+
+[connection signal="timeout" from="SelfDestroyTimer" to="." method="_on_self_destroy_timer_timeout"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
