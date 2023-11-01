@@ -14,6 +14,12 @@ config/name="Godot 3 to 4 Comparison - Godot 4"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Item"
+2d_physics/layer_3="Terrain"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
