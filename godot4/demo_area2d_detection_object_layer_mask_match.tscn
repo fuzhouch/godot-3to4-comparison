@@ -1,0 +1,119 @@
+[gd_scene load_steps=11 format=3 uid="uid://crhsaahq367au"]
+
+[ext_resource type="Script" path="res://demo_area2d_detection_object_layer_mask_match.gd" id="1_euvoy"]
+[ext_resource type="Texture2D" uid="uid://274e4g4d5w0v" path="res://item-gold-48x48-192x192-0002.png" id="1_h5xer"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xknxe"]
+size = Vector2(64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_el3bn"]
+atlas = ExtResource("1_h5xer")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mv3iw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_el3bn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6lmt"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrs3p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50pyq"]
+atlas = ExtResource("1_h5xer")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gwq1l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50pyq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hhdmn"]
+size = Vector2(128, 128)
+
+[node name="Demo_Area2D_Detection_Object_Layer_Mask_Match" type="Node2D"]
+script = ExtResource("1_euvoy")
+
+[node name="Group1" type="Node2D" parent="."]
+
+[node name="Character_LayerSet_MaskUnset" type="CharacterBody2D" parent="Group1"]
+position = Vector2(128, 256)
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Group1/Character_LayerSet_MaskUnset"]
+shape = SubResource("RectangleShape2D_xknxe")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Group1/Character_LayerSet_MaskUnset"]
+sprite_frames = SubResource("SpriteFrames_mv3iw")
+
+[node name="Detector" type="Area2D" parent="Group1"]
+position = Vector2(256, 256)
+collision_layer = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Group1/Detector"]
+shape = SubResource("RectangleShape2D_t6lmt")
+
+[node name="ColorRect" type="ColorRect" parent="Group1/Detector"]
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+color = Color(0.501961, 0.501961, 1, 0.752941)
+
+[node name="DetectionTimer" type="Timer" parent="Group1"]
+wait_time = 2.0
+autostart = true
+
+[node name="Group2" type="Node2D" parent="."]
+
+[node name="Character_LayerUnset_MaskSet" type="CharacterBody2D" parent="Group2"]
+position = Vector2(384, 256)
+collision_layer = 0
+collision_mask = 8
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Group2/Character_LayerUnset_MaskSet"]
+shape = SubResource("RectangleShape2D_yrs3p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Group2/Character_LayerUnset_MaskSet"]
+sprite_frames = SubResource("SpriteFrames_gwq1l")
+
+[node name="Detector" type="Area2D" parent="Group2"]
+position = Vector2(512, 256)
+collision_layer = 8
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Group2/Detector"]
+shape = SubResource("RectangleShape2D_hhdmn")
+
+[node name="ColorRect" type="ColorRect" parent="Group2/Detector"]
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+color = Color(1, 0.501961, 0.501961, 0.752941)
+
+[node name="DetectionTimer" type="Timer" parent="Group2"]
+wait_time = 2.0
+autostart = true
+
+[connection signal="body_entered" from="Group1/Detector" to="." method="_on_detector_body1_entered"]
+[connection signal="timeout" from="Group1/DetectionTimer" to="." method="_on_detection_timer1_timeout"]
+[connection signal="body_entered" from="Group2/Detector" to="." method="_on_detector_body2_entered"]
+[connection signal="timeout" from="Group2/DetectionTimer" to="." method="_on_detection_timer2_timeout"]
